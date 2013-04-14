@@ -44,6 +44,11 @@ install:	libmd.so.1.0 libmd.so.1 libmd.so
 	$(INSTALL) -g root -o root -m 755 libmd.so $(BUILDROOT)/usr/lib
 	$(INSTALL) -g root -o root -m 755 libmd.a $(BUILDROOT)/usr/lib
 
+uninstall:
+	cd $(BUILDROOT)/usr/include && rm -f md2.h md4.h md5.h sha.h rmd160.h
+	cd $(BUILDROOT)/usr/man/man3 && rm -f md2.3 md4.3 md5.3
+	cd $(BUILDROOT)/usr/lib && rm -f libmd.so.1.0 libmd.so.1 libmd.so libmd.a
+
 binary:	install
 	@echo Creating binary .tar.bz2 in directory $(OUTDIR)/
 	cd $(BUILDROOT)/ && tar cf $(OUTDIR)/libmd-$(VERS)-$(OSTYPE).tar `cat $(SRCDIR)/binfiles` --owner=root --group=root
