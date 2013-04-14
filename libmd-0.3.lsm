@@ -13,6 +13,6 @@ Primary-site:   ftp.penguin.cz /pub/users/mhi/libmd/
 Alternate-site: sunsite.unc.edu /???
                 12 kB  libmd-0.2.tar.bz2
                 0.5 kB libmd-0.2.lsm
-Platform:       Linux
+Platforms:      Linux/Unix
 Copying-policy: Various licenses on algorithms
 End

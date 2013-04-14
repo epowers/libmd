@@ -18,8 +18,6 @@
 #include <string.h>		/* for memcpy() */
 #include "md5.h"
 
-#include <bytesex.h>
-
 #if __BYTE_ORDER == 1234
 #define byteReverse(buf, len)	/* Nothing */
 #else

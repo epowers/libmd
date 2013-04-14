@@ -73,16 +73,15 @@ SHAInit (SHA_CTX * ctx)
    if they are to be called with expressions as arguments.
  */
 #define f1(x,y,z) ( z ^ (x & (y ^ z) ) )	/* Rounds 0-19 */
-#define f2(x,y,z) ( x ^ y ^ z )	/* Rounds 20-39 */
+#define f2(x,y,z) ( x ^ y ^ z )			/* Rounds 20-39 */
 #define f3(x,y,z) ( (x & y) + (z & (x ^ y) ) )	/* Rounds 40-59 */
-#define f4(x,y,z) ( x ^ y ^ z )	/* Rounds 60-79 */
+#define f4(x,y,z) ( x ^ y ^ z )			/* Rounds 60-79 */
 
 /* The SHA Mysterious Constants. */
-#define K2 0x5A827999L		/* Rounds 0-19 - floor(sqrt(2) * 2^30) */
-#define K3 0x6ED9EBA1L		/* Rounds 20-39 - floor(sqrt(3) * 2^30) */
-#define K5 0x8F1BBCDCL		/* Rounds 40-59 - floor(sqrt(5) * 2^30) */
+#define K2 0x5A827999L		/* Rounds 0 -19 - floor(sqrt(2)  * 2^30) */
+#define K3 0x6ED9EBA1L		/* Rounds 20-39 - floor(sqrt(3)  * 2^30) */
+#define K5 0x8F1BBCDCL		/* Rounds 40-59 - floor(sqrt(5)  * 2^30) */
 #define K10 0xCA62C1D6L		/* Rounds 60-79 - floor(sqrt(10) * 2^30) */
-/* I wonder why not use K7=0xA953FD4E, K11=0xD443949F or K13=0xE6C15A23 */
 
 /* 32-bit rotate left - kludged with shifts */
 #define ROTL(n,X) ( (X << n) | (X >> (32-n)) )
@@ -127,7 +126,7 @@ SHAInit (SHA_CTX * ctx)
    the variables (e,a,b,c,d) = (a',b',c',d',e') each iteration.
  */
 #define subRound(a, b, c, d, e, f, k, data) \
- ( e += ROTL(5,a) + f(b, c, d) + k + data, b = ROTL(30, b) )
+	 ( e += ROTL(5,a) + f(b, c, d) + k + data, b = ROTL(30, b) )
 /*
    The above code is replicated 20 times for each of the 4 functions,
    using the next 20 values from the W[] array for "data" each time.
@@ -141,7 +140,6 @@ SHAInit (SHA_CTX * ctx)
 
    Note that this corrupts the sha->key area.
  */
-
 static void
 SHATransform (struct SHAContext *sha)
 {

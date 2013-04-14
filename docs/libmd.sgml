@@ -1,0 +1,392 @@
+<!doctype linuxdoc system>
+
+<article>
+
+<!-- Title information -->
+
+<title>libmd - Message Digest library
+<author>Martin Hinner &lt;mhi@penguin.cz&gt;
+<date>Version 0.3, 20 Sep 1999
+<abstract>
+libmd is a MD2, MD4, MD5, SHA-1 and RIPEMD-160 message digest library.
+</abstract>
+
+<!-- Table of contents -->
+<toc>
+
+<!-- Begin the document -->
+
+<sect>Introduction
+<sect1>About libmd<p>
+libmd is a MD2, MD4, MD5, SHA-1 and RIPEMD-160 message digest library.
+Homepage of libmd is at <url url="http://www.penguin.cz/~mhi/libmd/">.
+
+<sect1>Installation<p>
+libmd is currently being developed and tested on Linux/i386,
+but it should compile and run on most modern Unix-like
+platforms. Installation is very simple:
+
+<descrip>
+  <tag>Download</tag>
+  <enum>
+    <item>Download the libmd package from
+          <url url="http://www.penguin.cz/~mhi/libmd/">.
+    <item>You will need also bzip2, so if you don't have it visit
+          <url url="http://www.bzip2.org/">.
+  </enum>
+
+  <tag>Unpack</tag>
+  <enum>
+    <item>Choose, and cd into, a convenient directory for the package
+          (e.g. /usr/src/).
+    <item>Extract source package:
+          <tt>bzip -dc libmd-x.y.tar.bz2 | tar -xvf -</tt>
+  </enum>
+
+  <tag>Build</tag>
+  <enum>
+    <item>Type <tt>./configure; make all</tt>. 
+    <item>If anything fails, report errors to the author (mhi@penguin.cz),
+          please.
+    <item>Documentation is in docs/ directory. You can (and should) copy
+          it to /usr/doc/libmd-x.y/ directory.
+  </enum>
+
+  <tag>Test</tag>
+  <enum>
+    <item>Type <tt>make test</tt> to test compiled libmd. It should work fine
+          on all 32bit machines. Let me know please if you have a 64bit
+          machine and it works.
+  </enum>
+
+  <tag>Install</tag>
+  <enum>
+    <item>Type <tt>make install</tt> to install libmd. This step will copy
+          library to <tt>/usr/lib</tt>, include files to
+          <tt>/usr/include</tt>, and manual pages to <tt>/usr/man</tt>.
+  </enum>
+
+</descrip>
+
+<sect1>Copyrights<p>
+This library uses code from various people. Code which is written by me
+(mhi@penguin.cz) is in the public domain and you can do whatever you
+want with it. If you use this library in your progam, please let me know. I'd
+like to know that this library is useful and someone use it ;-) 
+If you include libmd on a CD-ROM, I would like to receive a copy. 
+
+<sect2>MD2 copyright<p>
+Copyright (C) 1990-2, <htmlurl name="RSA Data Security, Inc"
+url="http://www.rsa.com">. Created 1990. All rights reserved.<p>
+
+License to copy and use this software is granted for
+non-commercial Internet Privacy-Enhanced Mail provided that it is
+identified as the "RSA Data Security, Inc. MD2 Message Digest
+Algorithm" in all material mentioning or referencing this software
+or this function.<p>
+
+RSA Data Security, Inc. makes no representations concerning either
+the merchantability of this software or the suitability of this
+software for any particular purpose. It is provided "as is"
+without express or implied warranty of any kind.<p>
+
+These notices must be retained in any copies of any part of this
+documentation and/or software.<p>
+
+<sect2>MD4 copyright<p>
+Copyright (C) 1991-2, <htmlurl name="RSA Data Security, Inc"
+url="http://www.rsa.com/">. Created 1991. All rights reserved.<p>
+
+License to copy and use this software is granted provided that it
+is identified as the "RSA Data Security, Inc. MD4 Message-Digest
+Algorithm" in all material mentioning or referencing this software
+or this function.<p>
+
+License is also granted to make and use derivative works provided
+that such works are identified as "derived from the RSA Data
+Security, Inc. MD4 Message-Digest Algorithm" in all material
+mentioning or referencing the derived work.<p>
+
+RSA Data Security, Inc. makes no representations concerning either
+the merchantability of this software or the suitability of this
+software for any particular purpose. It is provided "as is"
+without express or implied warranty of any kind.<p>
+
+These notices must be retained in any copies of any part of this
+documentation and/or software.<p>
+
+<sect2>MD5 copyright<p>
+The algorithm is due to <htmlurl name="Ron Rivest"
+url="mailto:rivest@theory.lcs.mit.edu">. This code was
+written by Colin Plumb in 1993, no copyright is claimed.
+This code is in the public domain; do with it what you wish.<p>
+
+Equivalent code is available from RSA Data Security, Inc.
+This code has been tested against that, and is equivalent,
+except that you don't need to include two pages of legalese
+with every copy.<p>
+
+<sect2>RIPEMD-160 copyright<p>
+The algorithm is by
+<htmlurl name="Hans Dobbertin" url="mailto:dobbertin@skom.rhein.de">,
+<htmlurl name="Antoon Bosselaers"
+url="mailto:antoon.bosselaers@esat.kuleuven.ac.be">, and
+<htmlurl name="Bart Preneel" url="mailto:bart.preneel@esat.kuleuven.ac.be">.
+<p>
+
+The code used in libmd is based on the reference implementation by Bosselaers.
+It is available at the time of writing from
+<url url="http://www.esat.kuleuven.ac.be/~bosselae/ripemd160.html"><p>
+
+<sect2>SHA-1 copyright<p>
+NIST Secure Hash Algorithm, FIPS PUB 180 and 180.1.
+The algorithm is by spook(s) unknown at the
+<htmlurl name="U.S. National Security Agency" url="http://www.nsa.gov">.<p>
+
+Written 2 September 1992, <htmlurl name="Peter C. Gutmann"
+url="mailto:pgut1@cs.aukuni.ac.nz">.
+This implementation placed in the public domain.<p>
+
+Modified 1 June 1993, Colin Plumb.
+Modified for the new SHS based on <htmlurl name="Peter Gutmann"
+url="mailto:pgut1@cs.aukuni.ac.nz">'s work,
+18 July 1994, Colin Plumb.<p>
+
+Renamed to SHA and comments updated a bit 1 November 1995, Colin Plumb.
+These modifications placed in the public domain.<p>
+
+<sect1>See also<p>
+
+<itemize>
+ <item> RFC 1319 - B. Kaliski, The MD2 Message-Digest Algorithm
+ <item> RFC 1186 - R. Rivest, The MD4 Message-Digest Algorithm
+ <item> RFC 1321 - R. Rivest, The MD5 Message-Digest Algorithm
+ <item> <url url="http://www.esat.kuleuven.ac.be/~bosselae/ripemd160.html">
+        - The RIPEMD-160 Message-Digest Algorithm
+ <item> FIPS PUB 180 and 180.1 - NIST, The SHA-1 Message-Digest Algorithm
+</itemize>
+
+<sect>Using libmd
+
+<sect1>hashInit, hashUpdate, hashFinal, hashEnd<p>
+The <bf>hashInit</bf> (replace hash with corresponding hash name),
+<bf>hashUpdate</bf>, and <bf>hashFinal</bf> functions are the
+core functions. Allocate an <bf>hash_CTX</bf>, initialize it with
+<bf>hashInit()</bf>,
+run over the data with <bf>hashUpdate()</bf>, and finally extract
+the result using <bf>hashFinal()</bf>.
+<bf>hashEnd()</bf> is a wrapper for <bf>hashFinal</bf> which converts
+the return value to a
+41- or 33-character (including the terminating '\0') ASCII string which
+represents the 160 or 128 bits in hexadecimal.
+
+<sect1>hashFile, hashData<p>
+<bf>hashFile</bf> calculates the digest of a file, and uses
+<bf>hashEnd()</bf> to return
+the result.  If the file cannot be opened, a null pointer is returned.
+<bf>hashData()</bf> calculates the digest of a chunk of data in memory,
+and uses <bf>hashEnd()</bf> to return the result.
+
+<sect1>Example<p>
+<verb>
+#include <md5.h>
+#include <string.h>
+
+ // in some function:
+
+ struct MD5Context ctx;
+ char *str = "This is test string";
+ char hash[MD5_HASHBYTES];
+
+ MD5Init(&amp;ctx);
+ MD5Update(&amp;ctx,str,strlen(str));
+ MD5Final(hash,&amp;ctx);
+ // ... do something with hash ...
+</verb>
+
+<sect1>Compatibility<p>
+The libmd is fully compatible with FreeBSD libmd library, except that
+FreeBSD version doesn't have RIPEMD-160 and SHA-1 functions. 
+
+<sect1>Benchmarks<p>
+I did benchmarks on my home <bf>i486DX/66</bf> Linux box, using egcs-2.91.
+The fastest algorithm is MD5 (3,9 MB/sec), then is MD4 (about 2,4 MB/sec)
+and RIPEMD-160 (889 KB/sec). Last but one is SHA-1 (570,5 KB/sec) and last
+is MD2 (48,6 KB/sec ;-) ).
+
+<sect>MD2<p>
+The algorithm takes as input a message of arbitrary length and produces
+as output a 128-bit "fingerprint" or "message digest" of the input.
+It is conjectured that it is computationally infeasible to produce
+two messages having the same message digest, or to produce any
+message having a given prespecified target message digest. The MD2
+algorithm is intended for digital signature applications, where a
+large file must be "compressed" in a secure manner before being
+signed with a private (secret) key under a public-key cryptosystem
+such as RSA.<p>
+
+License to use MD2 is granted for non-commerical Internet Privacy
+Enhanced Mail. Because of this license, algorithm speed and security,
+it is not recommended to use this hash function.<p>
+
+<sect1>MD2 Test suite<p>
+<verb>
+MD2("")                      = 8350e5a3e24c153df2275c9f80692773
+MD2("a")                     = 32ec01ec4a6dac72c0ab96fb34c0b5d1
+MD2("abc")                   = da853b0d3f88d99b30283a69e6ded6bb
+MD2("message digest")        = ab4f496bfb2a530b219ff33031fe06b0
+MD2(a..z)                    = 4e8ddff3650292ab5a4108c3aa47940b
+MD2(A..Za..z0..9)            = da33def2a42df13975352846c30338cd
+MD2(8 times "1234567890")    = d5976f79d83d3a0dc9806c3c66f3efd8
+</verb>
+
+<sect>MD4<p>
+The algorithm takes as input a message of arbitrary length and produces
+as output a 128-bit "fingerprint" or "message digest" of the input.
+It is conjectured that it is computationally infeasible to produce
+two messages having the same message digest, or to produce any
+message having a given prespecified target message digest. The MD4
+algorithm is intended for digital signature applications, where a
+large file must be "compressed" in a secure manner before being
+encrypted with a private (secret) key under a public-key cryptosystem
+such as RSA.<p>
+
+The MD4 algorithm is designed to be quite fast on 32-bit machines. In
+addition, the MD4 algorithm does not require any large substitution
+tables; the algorithm can be coded quite compactly. It is recommended
+to use MD5 instead of MD4, see section MD5.<p>
+
+<sect1>MD4 Test suite<p>
+<verb>
+MD4("")                      = 31d6cfe0d16ae931b73c59d7e0c089c0
+MD4("a")                     = bde52cb31de33e46245e05fbdbd6fb24
+MD4("abc")                   = a448017aaf21d8525fc10ae87aa6729d
+MD4("message digest")        = d9130a8164549fe818874806e1c7014b
+MD4(a..z)                    = d79e1c308aa5bbcdeea8ed63df412da9
+MD4(A..Za..z0..9)            = 043f8582f241db351ce627e153e7f0e4
+MD4(8 times "1234567890")    = e33b4ddc9c38f2199c3e7b164fcc0536
+</verb>
+
+<sect>MD5<p>
+The MD5 is a 128-bit cryptographic hash function.
+The MD5 algorithm is an extension of the MD4 message-digest algorithm
+MD5 is more "conservative" in design. MD5 was designed because it was
+felt that MD4 was perhaps
+being adopted for use more quickly than justified by the existing
+critical review; because MD4 was designed to be exceptionally fast,
+it is "at the edge" in terms of risking successful cryptanalytic
+attack. MD5 backs off a bit, giving up a little in speed for a much
+greater likelihood of ultimate security. It incorporates some
+suggestions made by various reviewers, and contains additional
+optimizations. <p>
+
+<sect1>"Pseudocollisions" in the MD5 Message-Digest Algorithm<p>
+by <htmlurl url="mailto:burt@rsa.com" name="Burton S. Kaliski Jr."> and
+<htmlurl url="mailto:matt@rsa.com" name="Matthew J.B. Robshaw">.<p>
+
+A message-digest algorithm maps a message of arbitrary length to a
+"digest" of fixed length, and has three properties: Computing the
+digest is easy, finding a message with a given
+digest - "inversion" - is hard, and finding two messages with the
+same digest - "collision" - is also hard. Message-digest algorithms
+have many applications, including digital signatures and message
+authentication.<p>
+
+While no message-digest algorithm can yet be proved
+secure, MD5 is believed to be at least as good as any other that maps
+to a 128-bit digest.  Inversion should take about 2^128
+operations, and collision should take about 2^64 operations.  No
+one has found a faster approach to inversion or collision.<p>
+
+Recent work by den Boer and Bosselaers presents
+a special kind of "pseudocollision" in MD5's
+internal compression function, which maps
+a 512-bit message block x and a
+128-bit input state s to a 128-bit output
+state. They show how to find a message block x
+and two related input states s_1 and s_2 that yield the same
+output state: f(x,s_1) = f(x,s_2).
+Their well-thought approach
+exploits structural properties of the collision function to find
+a pseudocollision in about 2_16 operations, much less than one
+would expect.<p>
+
+Practical implications of this pseudocollision work to the security of
+MD5 are not evident. While a real collision in MD5 implies a
+pseudocollision (or a "pseudo-inversion"), a
+pseudocollision need not imply a real collision. Indeed, a real
+collision, since it involves two different messages, would almost
+always involve <bf>different</bf> message blocks x_1 and
+x_2 such that f(x_1,s_1) = f(x_2,s_2),
+but the pseudocollisions have the same
+message blocks. Moreover, the input states s_1 and s_2
+would generally be unrelated, but the pseudocollisions' input states are
+the same except for four bits.  There does not seem to be any way to
+extend den Boer and Bosselaers' approach to anything beyond the
+special pseudocollisions, a limitation they readily admit.<p>
+
+It is reasonable, therefore, to believe that MD5 remains secure. While den
+Boer and Bosselaers have found interesting structural properties in
+MD5, the properties seem only to lead to special pseudocollisions
+and not anything approaching real collisions. Further research, of
+course, will give a better understanding of the strengths of MD5 and
+other message-digest algorithms, with the eventual hope that
+such algorithms can, in some sense, be proved secure.<p>
+
+<sect1>MD5 Test suite<p>
+<verb>
+MD5("")                      = d41d8cd98f00b204e9800998ecf8427e
+MD5("a")                     = 0cc175b9c0f1b6a831c399e269772661
+MD5("abc")                   = 900150983cd24fb0d6963f7d28e17f72
+MD5("message digest")        = f96b697d7cb7938d525a2f31aaf161d0
+MD5(a..z)                    = c3fcd3d76192e4007dfb496cca67e13b
+MD5(A..Za..z0..9)            = d174ab98d277d9f5a5611c2c9f419d9f
+MD5(8 times "1234567890")    = 57edf4a22be3c955ac49da2e2107b67a
+</verb>
+
+<sect>RIPEMD-160<p>
+RIPEMD-160 is a 160-bit cryptographic hash function, designed by
+Hans Dobbertin, Antoon Bosselaers and Bart Preneel. It is intended
+to be used as a secure replacement for the 128-bit hash functions
+as MD4, MD5 and RIPEMD. RIPEMD-160 was developed in the framework
+of the EU project RIPE (RACE Intergrity Primitives Evaluation).
+There are two good reasons to use this hash function:
+
+<itemize>
+ <item> A 128bit hash result does not offer sufficient protection
+        anymore.
+ <item> In the fall of 1995 Hans Dobbertin found collisions for all
+        3 rounds of MD4. Shorlty afterwards, in the spring of 1996,
+        he also found collisions for the compression function of MD5.
+</itemize>
+
+<sect1>RIPEMD-160 Test suite<p>
+<verb>
+RMD160("")                   = 9c1185a5c5e9fc54612808977ee8f548b2258d31
+RMD160("a")                  = 0bdc9d2d256b3ee9daae347be6f4dc835a467ffe
+RMD160("abc")                = 8eb208f7e05d987a9b044a8e98c6b087f15a0bfc
+RMD160("message digest")     = 5d0689ef49d2fae572b881b123a85ffa21595f36
+RMD160(a..z)                 = f71c27109c692c1b56bbdceb5b9d2865b3708dbc
+RMD160(A..Za..z0..9)         = b0e20b6e3116640286ed3a87a5713079b21f5189
+RMD160(8 times "1234567890") = 9b752e45573d4b39f4dbd3323cab82bf63326bfb
+</verb>
+
+<sect>SHA-1<p>
+The Secure Hash Algorithm (SHA) is
+necessary to ensure the security of the <bf>Digital Signature Standard</bf>.
+When a message of length < 2^64 bits is input, the SHA produces a
+160-bit representation of the message (the message digest).<p>
+
+<sect1>SHA-1 Test suite<p>
+<verb>
+SHA-1("")                    = da39a3ee5e6b4b0d3255bfef95601890afd80709
+SHA-1("a")                   = 86f7e437faa5a7fce15d1ddcb9eaeaea377667b8
+SHA-1("abc")                 = a9993e364706816aba3e25717850c26c9cd0d89d
+SHA-1("message digest")      = c12252ceda8be8994d5fa0290a47231c1d16aae3
+SHA-1(a..z)                  = 32d10c7b8cf96570ca04ce37f2a19d84240d3a89
+SHA-1(A..Za..z0..9)          = 761c457bf73b14d27e9e9265c46f4b4dda11f940
+SHA-1(8 times "1234567890")  = 50abf5706a150990a08b2c5ea40fa0e585554732
+</verb>
+
+</article>
+

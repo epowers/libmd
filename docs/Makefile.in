@@ -1,0 +1,10 @@
+all:	libmd.html libmd.txt
+
+clean:
+	rm -f libmd.txt libmd*.html
+
+libmd.html:	libmd.sgml
+	sgml2html -img libmd.sgml
+
+libmd.txt:	libmd.sgml
+	sgml2txt libmd.sgml

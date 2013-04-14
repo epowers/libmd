@@ -1,0 +1,101 @@
+SRC = md2c.c md4c.c md5c.c md2hl.c md4hl.c md5hl.c\
+      sha.c shahl.c rmd160.c rmd160hl.c
+OBJ = $(SRC:.c=.o)
+
+CC      = @CC@
+CFLAGS  = -O3 -fPIC -I.
+RANLIB  = @RANLIB@
+AR      = ar
+LN_S    = @LN_S@
+INSTALL = @INSTALL@
+
+VERS   = @VERSION@
+OSTYPE = @OS_TYPE@
+
+OUTDIR=$(PWD)/..
+SRCDIR=$(PWD)
+
+all:	libmd.so.1.0 md2.3 md4.3 md5.3 libmd.a docs
+
+clean:
+	rm -f *.o core libmd.a libmd.so* md[245]hl.c md[245].3\
+        shahl.c rmd160hl.c mddriver
+	(cd docs;make clean)
+
+mrproper:	clean
+	rm -f config.cache config.status config.log Makefile docs/Makefile
+	 
+docs:
+	(cd docs; make)
+
+test:	mddriver
+	./mddriver
+
+install:	libmd.so.1.0 libmd.so.1 libmd.so
+	mkdir -p $(BUILDROOT)/usr/include
+	mkdir -p $(BUILDROOT)/usr/lib
+	mkdir -p $(BUILDROOT)/usr/man/man3
+	$(INSTALL) -g root -o root -m 644 md2.h md4.h md5.h sha.h rmd160.h \
+		   $(BUILDROOT)/usr/include
+	$(INSTALL) -g root -o root -m 644 md2.3 md4.3 md5.3 \
+		   $(BUILDROOT)/usr/man/man3
+	$(INSTALL) -g root -o root -m 755 libmd.so.1.0 $(BUILDROOT)/usr/lib
+	$(INSTALL) -g root -o root -m 755 libmd.so.1 $(BUILDROOT)/usr/lib
+	$(INSTALL) -g root -o root -m 755 libmd.so $(BUILDROOT)/usr/lib
+	$(INSTALL) -g root -o root -m 755 libmd.a $(BUILDROOT)/usr/lib
+
+binary:	install
+	@echo Creating binary .tar.bz2 in directory $(OUTDIR)/
+	cd $(BUILDROOT)/ && tar cf $(OUTDIR)/libmd-$(VERS)-$(OSTYPE).tar `cat $(SRCDIR)/binfiles` --owner=root --group=root
+	bzip2 -9f $(OUTDIR)/libmd-$(VERS)-$(OSTYPE).tar
+
+tarball: mrproper
+	@echo Creating source .tar.bz2 in directory $(OUTDIR)/
+	cd .. && tar cf $(OUTDIR)/libmd-$(VERS).tar libmd-$(VERS)/
+	bzip2 -9f $(OUTDIR)/libmd-$(VERS).tar
+
+libmd.so.1:
+	$(LN_S) libmd.so.1.0 libmd.so.1
+
+libmd.so:
+	$(LN_S) libmd.so.1.0 libmd.so
+
+md2hl.c: mdXhl.c
+	sed -e 's/mdX/md2/g' -e 's/MDX/MD2/g' $? > $@
+
+md4hl.c: mdXhl.c
+	sed -e 's/mdX/md4/g' -e 's/MDX/MD4/g' $? > $@
+
+md5hl.c: mdXhl.c
+	sed -e 's/mdX/md5/g' -e 's/MDX/MD5/g' $? > $@
+
+shahl.c: mdXhl.c
+	sed -e 's/mdX/sha/g' -e 's/MDX/SHA/g' $? > $@
+
+rmd160hl.c: mdXhl.c
+	sed -e 's/mdX/rmd160/g' -e 's/MDX/RMD160/g' $? > $@
+
+md2.3:	mdX.3
+	sed -e 's/mdX/md2/g' -e 's/MDX/MD2/g' $? > $@
+	cat md2.copyright >> $@
+
+md4.3:	mdX.3
+	sed -e 's/mdX/md4/g' -e 's/MDX/MD4/g' $? > $@
+	cat md4.copyright >> $@
+
+md5.3:	mdX.3
+	sed -e 's/mdX/md5/g' -e 's/MDX/MD5/g' $? > $@
+	cat md5.copyright >> $@
+
+libmd.so.1.0:	$(OBJ)
+	$(CC) -shared -o libmd.so.1.0 $(OBJ)
+
+libmd.a:	$(OBJ)
+	rm -f libmd.a
+	$(AR) rulv libmd.a $(OBJ)
+	$(RANLIB) libmd.a
+
+mddriver:	mddriver.o libmd.so version.o
+	$(CC) -fPIC -O3 -o mddriver mddriver.o version.o -L. -lmd
+
+version.o:	version.c
