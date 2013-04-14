@@ -1,0 +1,5 @@
+Installation is very simple; type 'make' to compile libmd and 'make install'
+to install it into /usr/lib, /usr/man and /usr/include. If you'll have any
+problems with compiling or installing, don't hesitate to mail me.
+
+Martin Hinner <mhi@penguin.cz>

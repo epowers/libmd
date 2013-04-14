@@ -1,0 +1,5 @@
+This is Linux port of FreeBSD libmd package. The libmd is MD2, MD4 and MD5 
+message digest library. For more information see md2(3), md4(3) and md5(3)
+manual pages.
+
+-mhi@penguin.cz
