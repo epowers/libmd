@@ -24,7 +24,7 @@ char *
 MDXEnd(MDX_CTX *ctx, char *buf)
 {
     int i;
-    unsigned char digest[16];
+    unsigned char digest[MDX_HASHBYTES];
     static const char hex[]="0123456789abcdef";
 
     if (!buf)
@@ -32,7 +32,7 @@ MDXEnd(MDX_CTX *ctx, char *buf)
     if (!buf)
 	return 0;
     MDXFinal(digest,ctx);
-    for (i=0;i<16;i++) {
+    for (i=0;i<MDX_HASHBYTES;i++) {
 	buf[i+i] = hex[digest[i] >> 4];
 	buf[i+i+1] = hex[digest[i] & 0x0f];
     }

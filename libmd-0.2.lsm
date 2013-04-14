@@ -1,0 +1,18 @@
+Begin3
+Title:          libmd, message digest library
+Version:        0.2
+Entered-date:   Jul 29 1999
+Description:    Libmd is MD2, MD4, MD5, SHA-1 and RIPEMD160 message digest
+                library
+Keywords:       MD2 MD4 MD5 SHA-1 RIPEMD-160 message digest library
+Author:         mhi@penguin.cz (Martin Hinner)
+Maintained-by:  mhi@penguin.cz (Martin Hinner)
+Primary-site:   ftp.penguin.cz /pub/users/mhi/libmd/
+                20 kB  libmd-0.2.tar.bz2
+                0.5 kB libmd-0.2.lsm
+Alternate-site: sunsite.unc.edu /???
+                12 kB  libmd-0.2.tar.bz2
+                0.5 kB libmd-0.2.lsm
+Platform:       Linux
+Copying-policy: Various licenses on algorithms
+End

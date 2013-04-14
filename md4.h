@@ -25,6 +25,9 @@
 
 #ifndef _MD4_H_
 #define _MD4_H_
+
+#define MD4_HASHBYTES  16
+
 /* MD4 context. */
 typedef struct MD4Context {
   u_int32_t state[4];	/* state (ABCD) */
@@ -37,7 +40,7 @@ typedef struct MD4Context {
 __BEGIN_DECLS
 void   MD4Init(MD4_CTX *);
 void   MD4Update(MD4_CTX *, const unsigned char *, unsigned int);
-void   MD4Final(unsigned char [16], MD4_CTX *);
+void   MD4Final(unsigned char [MD4_HASHBYTES], MD4_CTX *);
 char * MD4End(MD4_CTX *, char *);
 char * MD4File(const char *, char *);
 char * MD4Data(const unsigned char *, unsigned int, char *);

@@ -23,6 +23,8 @@
 #ifndef _MD2_H_
 #define _MD2_H_
 
+#define MD2_HASHBYTES 16
+
 typedef struct MD2Context {
   unsigned char state[16];	/* state */
   unsigned char checksum[16];	/* checksum */
@@ -34,7 +36,7 @@ typedef struct MD2Context {
 
 void   MD2Init(MD2_CTX *);
 void   MD2Update(MD2_CTX *, const unsigned char *, unsigned int);
-void   MD2Final(unsigned char [16], MD2_CTX *);
+void   MD2Final(unsigned char [MD2_HASHBYTES], MD2_CTX *);
 char * MD2End(MD2_CTX *, char *);
 char * MD2File(const char *, char *);
 char * MD2Data(const unsigned char *, unsigned int, char *);

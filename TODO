@@ -1,4 +1,6 @@
 - Write autoconf. Please mail me if libmd doesn't compile on your system.
-- Clear source codes.
-- Write better documentation
-- SHA ?
+- Clean source codes.
+- Write better documentation (sgmltools?)
+- SHA man page
+- RIPEMD160 man page
+- only *ONE* mddriver for all MD algorithms
